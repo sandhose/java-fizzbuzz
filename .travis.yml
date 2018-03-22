@@ -1,2 +1,17 @@
 language: java
 sudo: false
+
+install: gradle assemble
+
+script:
+  - gradle check
+  - gradle docs
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: build/docs/javadoc
+  keep-history: true
+  on:
+    branch: master
